@@ -1,7 +1,18 @@
 # Regolith
-🌗 An elegant Pseudocode compiler for beginners built in Python
+🌗 An elegant Pseudocode-like language for beginners built in Python
 
-Here's a sample `Fizzbuzz` program written in Regolith:
+## What is it?
+Regolith is a minimal, dynamically-typed, functional Pseudocode-like programming language mainly meant for beginners learning how to code; it uses a logic-first approach than a language-first one. It features a custom compiler written in **Python v3.6**.
+
+This README provides an in-depth review of the language, its nuances, and syntax.
+
+## Why build it?
+I built Regolith while learning about compilers and interpreters. It's based off Pseudocode because of its use in teaching beginners how to use logic to solve problems. I use Python for almost every project I take up, be it at work or for side-projects. I decided to use the language to make Regolith owing to its simplicity and structure.
+
+I envision Regolith to be something beginners pick up first (as they do with Pseudocode). It looks very similar to `Q-BASIC` with the uppercase character set.
+
+## Samples
+Here's the `Fizzbuzz` program written in Regolith:
 
 ```
 PROCEDURE fizzbuzz(n : INT)
@@ -16,3 +27,6 @@ PROCEDURE fizzbuzz(n : INT)
         
 fizzbuzz(50)
 ```
+
+## License
+[MIT](https://github.com/rish-16/Regolith/blob/master/LICENSE)
