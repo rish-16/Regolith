@@ -6,7 +6,7 @@ class RegoLexer:
         
     def _add_tokens(self):
         # print
-        self.lexer.add('PRINT', r'OUTPUT')
+        self.lexer.add('PRINT', r'print')
         
         # parenthesis
         self.lexer.add('OPEN_PARAN', r'\(')
