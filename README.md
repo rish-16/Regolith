@@ -2,7 +2,7 @@
 🌗 An elegant Pseudocode-like language for beginners built in Python
 
 ## What is it?
-Regolith is a minimal, dynamically-typed, functional Pseudocode-like programming language mainly meant for beginners learning how to code; it uses a logic-first approach than a language-first one. It features a custom compiler written in **Python v3.6**.
+Regolith is a minimal, dynamically-typed, functional Pseudocode-like programming language mainly meant for beginners learning how to code; it uses a logic-first approach rather than a language-first one. It features a custom compiler written in **Python v3.6**.
 
 This README provides an in-depth review of the language, its nuances, and syntax.
 
