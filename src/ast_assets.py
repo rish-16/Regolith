@@ -1,26 +1,28 @@
-class Number():
-    def __init__(self, val):
-        self.val = val
-        
+from rply.token import BaseBox
+
+class Number(BaseBox):
+    def __init__(self, value):
+        self.value = value
+
     def eval(self):
-        return int(self.val)
-        
-class BinaryOp():
+        return self.value
+
+class BinaryOp(BaseBox):
     def __init__(self, left, right):
         self.left = left
         self.right = right
-        
-class Sum(BinaryOp):
+
+class Add(BinaryOp):
     def eval(self):
         return self.left.eval() + self.right.eval()
-        
+
 class Sub(BinaryOp):
     def eval(self):
         return self.left.eval() - self.right.eval()
         
 class Print():
-    def __init__(self, val):
-        self.val = val
+    def __init__(self, value):
+        self.value = value
         
     def eval(self):
-        print (self.val.eval())
+        print (self.value.eval())
