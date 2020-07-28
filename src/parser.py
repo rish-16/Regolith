@@ -1,11 +1,11 @@
 from rply import ParserGenerator
-from ast_assets import Number, Add, Sub, Print
+from ast_assets import Number, Print, Add, Sub, Mul, Div
 
 class RegoParser:
     def __init__(self):
         self.pg = ParserGenerator(
-            ['NUMBER', 'PRINT', 'OPEN_PAREN', 'CLOSE_PAREN', 'ADD', 'SUB'],
-            precedence=[('left', ['ADD', 'SUB'])]
+            ['NUMBER', 'PRINT', 'OPEN_PAREN', 'CLOSE_PAREN', 'ADD', 'SUB', 'MUL', 'DIV'],
+            precedence=[('left', ['ADD', 'SUB']), ('left', ['MUL', 'DIV'])]
         )
         
     def parse(self):  
@@ -23,6 +23,8 @@ class RegoParser:
             
         @self.pg.production('expression : expression ADD expression')
         @self.pg.production('expression : expression SUB expression')
+        @self.pg.production('expression : expression MUL expression')
+        @self.pg.production('expression : expression DIV expression')
         def expression_binop(p):
             left = p[0]
             operator = p[1]
@@ -32,6 +34,10 @@ class RegoParser:
                 return Add(left, right)
             elif operator.gettokentype() == 'SUB':
                 return Sub(left, right)
+            elif operator.gettokentype() == 'MUL':
+                return Mul(left, right)
+            elif operator.gettokentype() == 'DIV':
+                return Div(left, right)
             else:
                 raise AssertionError('Operation not possible.')
             

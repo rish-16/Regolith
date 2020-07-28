@@ -1,7 +1,7 @@
 from lex import RegoLexer
 from parser import RegoParser
 
-text_input = 'OUTPUT (4 + 100 - 22)'
+text_input = 'OUTPUT (4 * 100 DIV 10)'
 
 lexer = RegoLexer().get_lexer()
 parser = RegoParser().get_parser()

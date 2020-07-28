@@ -11,6 +11,8 @@ class RegoLexer:
         # operations
         self.lexer.add('ADD', r'\+')
         self.lexer.add('SUB', r'\-')
+        self.lexer.add('MUL', r'\*')
+        self.lexer.add('DIV', r'DIV')
         
         # self.lexer.add('SEMI_COLON', r'\;')
         self.lexer.add('OPEN_PAREN', r'\(')
