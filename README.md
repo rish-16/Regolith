@@ -35,7 +35,7 @@ Here's a list of everything you can do with Regolith:
 - Arithmetic (add, subtract, multiply, divide, modulus, exponentiation)
 - Printing
 
-> I'll be updating this list as and when a new feature is added
+> **Note:** I'll be updating this list as and when a new feature is added
 
 ## License
 [MIT](https://github.com/rish-16/Regolith/blob/master/LICENSE)
