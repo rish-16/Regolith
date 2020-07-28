@@ -4,12 +4,12 @@ from ast_assets import Number, Print, Add, Sub, Mul, Div
 class RegoParser:
     def __init__(self):
         self.pg = ParserGenerator(
-            ['NUMBER', 'PRINT', 'OPEN_PAREN', 'CLOSE_PAREN', 'ADD', 'SUB', 'MUL', 'DIV'],
+            ['NUMBER', 'PRINT', 'SEMI_COLON', 'OPEN_PAREN', 'CLOSE_PAREN', 'ADD', 'SUB', 'MUL', 'DIV'],
             precedence=[('left', ['ADD', 'SUB']), ('left', ['MUL', 'DIV'])]
         )
         
     def parse(self):  
-        @self.pg.production('program : PRINT OPEN_PAREN expression CLOSE_PAREN')
+        @self.pg.production('program : PRINT OPEN_PAREN expression CLOSE_PAREN SEMI_COLON')
         def program(p):
             return Print(p[2])
             
@@ -17,7 +17,7 @@ class RegoParser:
         def expression_number(p):
             return Number(int(p[0].getstr()))
             
-        @self.pg.production('expression : OPEN_PAREN expression CLOSE_PAREN')
+        @self.pg.production('expression : OPEN_PAREN expression CLOSE_PAREN SEMI_COLON')
         def expression_paren(p):
             return p[1]
             
