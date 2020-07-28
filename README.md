@@ -2,7 +2,7 @@
 🌗 An elegant Pseudocode-like language for beginners built in Python
 
 ## What is it?
-Regolith is a minimal, dynamically-typed, functional Pseudocode-like programming language mainly meant for beginners learning how to code; it uses a logic-first approach rather than a language-first one. It features a custom compiler written in **Python v3.6**.
+Regolith is a dynamically-typed Pseudocode-like programming language mainly meant for beginners learning how to code; it uses a logic-first approach rather than a language-first one. It features a custom compiler written in **Python v3.6**.
 
 This README provides an in-depth review of the language, its nuances, and syntax.
 
@@ -27,6 +27,15 @@ PROCEDURE fizzbuzz(n : INT)
         
 fizzbuzz(50)
 ```
+
+## What can you do?
+Here's a list of everything you can do with Regolith:
+
+- Basic expressions
+- Arithmetic (add, subtract, multiply, divide, modulus, exponentiation)
+- Printing
+
+> I'll be updating this list as and when a new feature is added
 
 ## License
 [MIT](https://github.com/rish-16/Regolith/blob/master/LICENSE)
