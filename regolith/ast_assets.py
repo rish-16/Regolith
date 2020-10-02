@@ -6,6 +6,13 @@ class Number(BaseBox):
 
     def eval(self):
         return self.value
+        
+class String(BaseBox):
+    def __init__(self, value):
+        self.value = value
+        
+    def eval(self):
+        return self.value
 
 class BinaryOp(BaseBox):
     def __init__(self, left, right):

@@ -1,10 +1,10 @@
 from rply import ParserGenerator
-from ast_assets import Number, Print, Add, Sub, Mul, Div, Mod, Pow
+from ast_assets import Number, String, Print, Add, Sub, Mul, Div, Mod, Pow
 
 class RegoParser:
     def __init__(self):
         self.pg = ParserGenerator(
-            ['NUMBER', 'PRINT', 'SEMI_COLON', 'OPEN_PAREN', 'CLOSE_PAREN', 'ADD', 'SUB', 'MUL', 'DIV', 'MOD', 'POW'],
+            ['NUMBER', 'STRING', 'PRINT', 'APOS', 'SEMI_COLON', 'OPEN_PAREN', 'CLOSE_PAREN', 'ADD', 'SUB', 'MUL', 'DIV', 'MOD', 'POW'],
             precedence=[('left', ['ADD', 'SUB']), ('left', ['MUL', 'DIV']), ('left', ['MOD', 'POW'])]
         )
         
@@ -16,6 +16,11 @@ class RegoParser:
         @self.pg.production('expression : NUMBER')
         def expression_number(p):
             return Number(int(p[0].getstr()))
+            
+        @self.pg.production('expression : APOS STRING APOS')
+        def expression_string(p):
+            print (p)
+            return String(str(p[1].getstr()))
             
         @self.pg.production('expression : OPEN_PAREN expression CLOSE_PAREN SEMI_COLON')
         def expression_paren(p):

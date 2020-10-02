@@ -7,6 +7,7 @@ class RegoLexer:
     def create_tokens(self):
         self.lexer.add('PRINT', r'OUTPUT')
         self.lexer.add('NUMBER', '\d+')
+        self.lexer.add('STRING', '\w+')
         
         # operations
         self.lexer.add('ADD', r'\+')
@@ -19,7 +20,9 @@ class RegoLexer:
         self.lexer.add('SEMI_COLON', r'\;')
         self.lexer.add('OPEN_PAREN', r'\(')
         self.lexer.add('CLOSE_PAREN', r'\)')
-    
+        
+        self.lexer.add('APOS', r'\"')
+        
         self.lexer.ignore('\s+')
         
     def get_lexer(self):
