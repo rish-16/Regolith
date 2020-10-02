@@ -12,7 +12,7 @@ class String(BaseBox):
         self.value = value
         
     def eval(self):
-        return self.value
+        return str(self.value)
 
 class BinaryOp(BaseBox):
     def __init__(self, left, right):
