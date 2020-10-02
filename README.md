@@ -1,5 +1,5 @@
-# Regolith
-🌗 An elegant Pseudocode-like language for beginners built in Python
+# 🌗 Regolith
+An elegant Pseudocode-like language for beginners built in Python
 
 ## What is it?
 Regolith is a dynamically-typed Pseudocode-like programming language mainly meant for beginners learning how to code; it uses a logic-first approach rather than a language-first one. It features a custom compiler written in **Python v3.6**.
