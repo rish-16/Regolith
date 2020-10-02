@@ -8,6 +8,7 @@ class RegoLexer:
         self.lexer.add('PRINT', r'OUTPUT')
         self.lexer.add('NUMBER', '\d+')
         self.lexer.add('STRING', '".+"')
+        self.lexer.add('NEWLINE', '\n')
         
         # operations
         self.lexer.add('ADD', r'\+')

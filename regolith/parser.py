@@ -1,17 +1,20 @@
 from rply import ParserGenerator
-from ast_assets import Number, String, Print, Add, Sub, Mul, Div, Mod, Pow
+from ast_assets import Program, Number, String, Print, Add, Sub, Mul, Div, Mod, Pow
 
 class RegoParser:
     def __init__(self):
         self.pg = ParserGenerator(
-            ['NUMBER', 'STRING', 'PRINT', 'SEMI_COLON', 'OPEN_PAREN', 'CLOSE_PAREN', 'ADD', 'SUB', 'MUL', 'DIV', 'MOD', 'POW'],
+            ['NUMBER', 'STRING', 'PRINT', 'SEMI_COLON', 'NEWLINE', 'OPEN_PAREN', 'CLOSE_PAREN', 'ADD', 'SUB', 'MUL', 'DIV', 'MOD', 'POW'],
             precedence=[('left', ['ADD', 'SUB']), ('left', ['MUL', 'DIV']), ('left', ['MOD', 'POW'])]
         )
         
     def parse(self):
-        @self.pg.production('program : PRINT OPEN_PAREN expression CLOSE_PAREN SEMI_COLON')
+        @self.pg.production('program : statement')
+        def entire_program(tokens):
+            return Program(tokens)
+    
+        @self.pg.production('statement : PRINT OPEN_PAREN expression CLOSE_PAREN SEMI_COLON')
         def print_statement(tokens):
-            print (tokens)
             return Print(tokens[2])
             
         @self.pg.production('expression : NUMBER')
@@ -20,8 +23,11 @@ class RegoParser:
             
         @self.pg.production('expression : STRING')
         def expression_string(tokens):
-            print (tokens)
             return String(str(tokens[0].getstr()))
+            
+        @self.pg.production('expression : NEWLINE')
+        def handle_newline(tokens):
+            return String(tokens.split("NEWLINE"))
             
         @self.pg.production('expression : OPEN_PAREN expression CLOSE_PAREN SEMI_COLON')
         def expression_paren(tokens):

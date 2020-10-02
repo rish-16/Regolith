@@ -2,7 +2,8 @@ from lex import RegoLexer
 from parser import RegoParser
 
 text_input = """
-OUTPUT ("hello world");
+OUTPUT ("Hello, world! This is Regolith :D");
+OUTPUT ("Hello, world! This is Regolith :D");
 """
 
 lexer = RegoLexer().get_lexer()

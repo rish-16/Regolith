@@ -1,5 +1,12 @@
 from rply.token import BaseBox
 
+class Program(BaseBox):
+    def __init__(self, token_list):
+        self.token_list = token_list
+        
+    def eval(self):
+        return [self.token_list[i].eval() for i in range(len(self.token_list))]
+
 class Number(BaseBox):
     def __init__(self, value):
         self.value = value
