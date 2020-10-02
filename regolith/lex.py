@@ -8,7 +8,6 @@ class RegoLexer:
         self.lexer.add('PRINT', r'OUTPUT')
         self.lexer.add('NUMBER', '\d+')
         self.lexer.add('STRING', '".+"')
-        self.lexer.add('NEWLINE', '\n')
         
         # operations
         self.lexer.add('ADD', r'\+')
@@ -23,6 +22,7 @@ class RegoLexer:
         self.lexer.add('CLOSE_PAREN', r'\)')
         
         self.lexer.ignore('\s+')
+        self.lexer.ignore('\n')
         
     def get_lexer(self):
         self.create_tokens()

@@ -4,18 +4,32 @@ from ast_assets import Program, Number, String, Print, Add, Sub, Mul, Div, Mod, 
 class RegoParser:
     def __init__(self):
         self.pg = ParserGenerator(
-            ['NUMBER', 'STRING', 'PRINT', 'SEMI_COLON', 'NEWLINE', 'OPEN_PAREN', 'CLOSE_PAREN', 'ADD', 'SUB', 'MUL', 'DIV', 'MOD', 'POW'],
+            ['NUMBER', 'STRING', 'PRINT', 'SEMI_COLON', 'OPEN_PAREN', 'CLOSE_PAREN', 'ADD', 'SUB', 'MUL', 'DIV', 'MOD', 'POW'],
             precedence=[('left', ['ADD', 'SUB']), ('left', ['MUL', 'DIV']), ('left', ['MOD', 'POW'])]
         )
         
     def parse(self):
-        @self.pg.production('program : statement')
-        def entire_program(tokens):
-            return Program(tokens)
+        @self.pg.production('program : statement_list')
+        def main(state_list):
+            print (state_list)
+            return Program(state_list)
+            
+        @self.pg.production('statement_list : statement SEMI_COLON')
+        def statement_list_stmt(tokens):
+            return tokens
+            
+        @self.pg.production('statement_list : statement_list statement SEMI_COLON')
+        def statement_list(tokens):
+            tokens[0].extend(tokens[1:])
+            return tokens[0][0]
     
-        @self.pg.production('statement : PRINT OPEN_PAREN expression CLOSE_PAREN SEMI_COLON')
+        @self.pg.production('statement : PRINT OPEN_PAREN expression CLOSE_PAREN')
         def print_statement(tokens):
             return Print(tokens[2])
+            
+        @self.pg.production('statement : expression')
+        def statement_expr(tokens):
+            return tokens[0]
             
         @self.pg.production('expression : NUMBER')
         def expression_number(tokens):
@@ -25,11 +39,7 @@ class RegoParser:
         def expression_string(tokens):
             return String(str(tokens[0].getstr()))
             
-        @self.pg.production('expression : NEWLINE')
-        def handle_newline(tokens):
-            return String(tokens.split("NEWLINE"))
-            
-        @self.pg.production('expression : OPEN_PAREN expression CLOSE_PAREN SEMI_COLON')
+        @self.pg.production('expression : OPEN_PAREN expression CLOSE_PAREN')
         def expression_paren(tokens):
             return tokens[1]
             
