@@ -4,6 +4,7 @@ from parser import RegoParser
 text_input = """
 OUTPUT (5 + 234);
 OUTPUT (2 + 2);
+OUTPUT ("Hello world");
 """
 
 lexer = RegoLexer().get_lexer()

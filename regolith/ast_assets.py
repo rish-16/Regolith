@@ -1,3 +1,4 @@
+from pprint import pprint
 from rply.token import BaseBox
 
 class Program(BaseBox):
@@ -5,7 +6,7 @@ class Program(BaseBox):
         self.token_list = token_list
         
     def eval(self):
-        return [self.token_list[i].eval() for i in range(len(self.token_list))]
+        return [i.eval() for i in self.token_list]
 
 class Number(BaseBox):
     def __init__(self, value):

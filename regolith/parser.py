@@ -11,17 +11,17 @@ class RegoParser:
     def parse(self):
         @self.pg.production('program : statement_list')
         def main(state_list):
-            print (state_list)
-            return Program(state_list)
+            return Program(state_list[0])
             
         @self.pg.production('statement_list : statement SEMI_COLON')
         def statement_list_stmt(tokens):
-            return tokens
+            return [tokens[0]] # only return the statement and not semicolon
             
         @self.pg.production('statement_list : statement_list statement SEMI_COLON')
         def statement_list(tokens):
-            tokens[0].extend(tokens[1:])
-            return tokens[0][0]
+            initial = tokens[0]
+            initial.append(tokens[1])
+            return initial
     
         @self.pg.production('statement : PRINT OPEN_PAREN expression CLOSE_PAREN')
         def print_statement(tokens):
