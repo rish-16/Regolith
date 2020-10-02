@@ -7,7 +7,7 @@ class RegoLexer:
     def create_tokens(self):
         self.lexer.add('PRINT', r'OUTPUT')
         self.lexer.add('NUMBER', '\d+')
-        self.lexer.add('STRING', r'\"\w+|\s+"')
+        self.lexer.add('STRING', '".+"')
         
         # operations
         self.lexer.add('ADD', r'\+')

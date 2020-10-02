@@ -10,20 +10,22 @@ class RegoParser:
         
     def parse(self):
         @self.pg.production('program : PRINT OPEN_PAREN expression CLOSE_PAREN SEMI_COLON')
-        def print_statement(p):
-            return Print(p[2])
+        def print_statement(tokens):
+            print (tokens)
+            return Print(tokens[2])
             
         @self.pg.production('expression : NUMBER')
-        def expression_number(p):
-            return Number(int(p[0].getstr()))
+        def expression_number(tokens):
+            return Number(int(tokens[0].getstr()))
             
         @self.pg.production('expression : STRING')
-        def expression_string(p):
-            return String(str(p[0].getstr()))
+        def expression_string(tokens):
+            print (tokens)
+            return String(str(tokens[0].getstr()))
             
         @self.pg.production('expression : OPEN_PAREN expression CLOSE_PAREN SEMI_COLON')
-        def expression_paren(p):
-            return p[1]
+        def expression_paren(tokens):
+            return tokens[1]
             
         @self.pg.production('expression : expression ADD expression')
         @self.pg.production('expression : expression SUB expression')
@@ -31,10 +33,10 @@ class RegoParser:
         @self.pg.production('expression : expression DIV expression')
         @self.pg.production('expression : expression MOD expression')
         @self.pg.production('expression : expression POW expression')
-        def expression_binop(p):
-            left = p[0]
-            operator = p[1]
-            right = p[2]
+        def expression_binop(tokens):
+            left = tokens[0]
+            operator = tokens[1]
+            right = tokens[2]
             
             if operator.gettokentype() == 'ADD':
                 return Add(left, right)
@@ -52,8 +54,8 @@ class RegoParser:
                 raise AssertionError('Operation not possible.')
             
         @self.pg.error
-        def error_handler(token):
-            raise ValueError("Ran into a {} where it wasn't expected.".format(token.gettokentype()))
+        def error_handler(tokens):
+            raise ValueError("Ran into a {} where it wasn't expected.".format(tokens.gettokentype()))
             
     def get_parser(self):
         self.parse()

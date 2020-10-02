@@ -2,7 +2,7 @@ from lex import RegoLexer
 from parser import RegoParser
 
 text_input = """
-OUTPUT ("hello");
+OUTPUT ("hello world");
 """
 
 lexer = RegoLexer().get_lexer()
