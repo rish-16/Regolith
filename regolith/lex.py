@@ -6,8 +6,10 @@ class RegoLexer:
         
     def create_tokens(self):
         self.lexer.add('PRINT', r'OUTPUT')
-        self.lexer.add('NUMBER', '\d+')
-        self.lexer.add('STRING', '".+"')
+        self.lexer.add('NUMBER', '-?\d+')
+        self.lexer.add('STRING', '(".+")|(\'.+\')|(\'\')|("")')
+        self.lexer.add('NEWLINE', '\n')
+        self.lexer.add('IDENTIFIER', '[a-zA-Z_][a-zA-Z0-9_]')
         
         # operations
         self.lexer.add('ADD', r'\+')
@@ -21,15 +23,15 @@ class RegoLexer:
         self.lexer.add('OPEN_PAREN', r'\(')
         self.lexer.add('CLOSE_PAREN', r'\)')
         
-        # comments
-        self.lexer.add('COMMENT', r'(\/\/.+)')
+        # variables
+        self.lexer.add('VAR_INIT', '(DECLARE)')
+        self.lexer.add('=', '=')
         
         # data types
         # self.lexer.add('INTEGER_TYPE', r'INTEGER')
         # self.lexer.add('STRING_TYPE', r'STRING')
         
-        self.lexer.ignore('\s+')
-        self.lexer.ignore('\n')
+        self.lexer.ignore('[ \t\r\f\v]+')
         
     def get_lexer(self):
         self.create_tokens()

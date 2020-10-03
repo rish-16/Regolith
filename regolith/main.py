@@ -12,7 +12,7 @@ lexer = RegoLexer().get_lexer()
 parser = RegoParser().get_parser()
 
 with open(filename) as f:
-    data = f.read().strip().split("\n")
+    data = f.read().strip()
     data = "".join(data)
 
 tokens = lexer.lex(data)
