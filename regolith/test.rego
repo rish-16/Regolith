@@ -1,3 +1,2 @@
-OUTPUT (5 + 234);
-OUTPUT (2 + 2);
-OUTPUT ("Hello world");
+OUTPUT (5 * 40); // hello
+OUTPUT (5 * 80);

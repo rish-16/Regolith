@@ -21,6 +21,13 @@ class RegoLexer:
         self.lexer.add('OPEN_PAREN', r'\(')
         self.lexer.add('CLOSE_PAREN', r'\)')
         
+        # comments
+        self.lexer.add('COMMENT', r'(\/\/.+)')
+        
+        # data types
+        # self.lexer.add('INTEGER_TYPE', r'INTEGER')
+        # self.lexer.add('STRING_TYPE', r'STRING')
+        
         self.lexer.ignore('\s+')
         self.lexer.ignore('\n')
         

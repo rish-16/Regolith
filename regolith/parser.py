@@ -1,26 +1,39 @@
+from pprint import pprint
 from rply import ParserGenerator
-from ast_assets import Program, Number, String, Print, Add, Sub, Mul, Div, Mod, Pow
+from ast_assets import Program, Number, String, Print, Add, Sub, Mul, Div, Mod, Pow, Comment
 
 class RegoParser:
     def __init__(self):
         self.pg = ParserGenerator(
-            ['NUMBER', 'STRING', 'PRINT', 'SEMI_COLON', 'OPEN_PAREN', 'CLOSE_PAREN', 'ADD', 'SUB', 'MUL', 'DIV', 'MOD', 'POW'],
+            ['NUMBER', 'STRING', 'PRINT', 'SEMI_COLON', 'OPEN_PAREN', 'CLOSE_PAREN', 'ADD', 'SUB', 'MUL', 'DIV', 'MOD', 'POW', 'COMMENT'],
             precedence=[('left', ['ADD', 'SUB']), ('left', ['MUL', 'DIV']), ('left', ['MOD', 'POW'])]
         )
         
     def parse(self):
         @self.pg.production('program : statement_list')
         def main(state_list):
+            pprint (state_list)
             return Program(state_list[0])
             
         @self.pg.production('statement_list : statement SEMI_COLON')
         def statement_list_stmt(tokens):
             return [tokens[0]] # only return the statement and not semicolon
             
+        @self.pg.production('statement_list : statement SEMI_COLON COMMENT')
+        def inline_comment(tokens):
+            return [tokens[0], Comment(tokens[2])]
+            
         @self.pg.production('statement_list : statement_list statement SEMI_COLON')
         def statement_list(tokens):
             initial = tokens[0]
             initial.append(tokens[1])
+            return initial
+            
+        @self.pg.production('statement_list : statement_list statement SEMI_COLON COMMENT')
+        def statement_list_comment(tokens):
+            initial = tokens[0]
+            initial.append(tokens[1])
+            initial.append(tokens[3])
             return initial
     
         @self.pg.production('statement : PRINT OPEN_PAREN expression CLOSE_PAREN')
