@@ -1,12 +1,11 @@
 from pprint import pprint
 from rply import ParserGenerator
-from ast_assets import Program, Number, String, Print, Add, Sub, Mul, Div, Mod, Pow, Assignment, Variable
+from ast_assets import Program, Number, String, Print, Add, Sub, Mul, Div, Mod, Pow
 
 class RegoParser:
     def __init__(self):
         self.pg = ParserGenerator(
-            ['NEWLINE', 'NUMBER', 'STRING', 'PRINT', 'SEMI_COLON', 'OPEN_PAREN', 'CLOSE_PAREN', 'ADD', 'SUB', 'MUL', 'DIV', 'MOD', 'POW'
-            'VAR_INIT', '='],
+            ['NEWLINE', 'NUMBER', 'STRING', 'PRINT', 'SEMI_COLON', 'OPEN_PAREN', 'CLOSE_PAREN', 'ADD', 'SUB', 'MUL', 'DIV', 'MOD', 'POW'],
             precedence=[('left', ['ADD', 'SUB']), ('left', ['MUL', 'DIV']), ('left', ['MOD', 'POW'])]
         )
         
@@ -14,7 +13,7 @@ class RegoParser:
         @self.pg.production('program : statement_list')
         def main(state_list):
             return Program(state_list[0])
-            
+        
         @self.pg.production('statement_list : statement SEMI_COLON')
         def statement_list_stmt(tokens):
             return [tokens[0]] # only return the statement and not semicolon
@@ -28,10 +27,6 @@ class RegoParser:
             initial = tokens[0]
             initial.append(tokens[1])
             return initial
-            
-        @self.pg.production('statement : VAR_INIT IDENTIFIER = expression')
-        def declare_variable(tokens):
-            return Assignment(Variable(tokens[1].getstr()), tokens[3])
     
         @self.pg.production('statement : PRINT OPEN_PAREN expression CLOSE_PAREN')
         def print_statement(tokens):

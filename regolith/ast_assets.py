@@ -29,23 +29,6 @@ class Comment(BaseBox):
     def eval(self):
         pass
         
-class DeclareInteger(BaseBox):
-    def __init__(self, name, data_type, value):
-        super().__init__()
-        self.name = name
-        self.data_type = data_type
-        self.value = value
-        
-    def __repr__(self):
-        return self.value
-        
-    def eval(self):
-        self.name = self.value
-        if type(self.data_type) == type(value):
-            return self.name
-        else:
-            raise TypeError("TypeError detected")
-
 class BinaryOp(BaseBox):
     def __init__(self, left, right):
         self.left = left
