@@ -54,7 +54,7 @@ $ git clone https://github.com/rish-16/Regolith.git
 Next head to the `regolith` directory and run the `main.py` file providing the Regolith filename as an argument using the `--file` or `-f` flag:
 ```bash
 $ cd regolith
-$ python main.py -file test.rego
+$ python main.py --file test.rego
 ```
 
 ## License
