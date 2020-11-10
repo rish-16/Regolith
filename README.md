@@ -7,7 +7,7 @@ Regolith is a dynamically-typed Pseudocode-like programming language mainly mean
 This README provides an in-depth review of the language, its nuances, and syntax.
 
 ### The Name
-Regolith is the blanket of loose rock deposits on the surface of space rocks, planets, and moons. It represents the flexibility and surface level nature of the language. Crazy connection, I know. For more information about the name, check out its [Wikipedia page](https://en.wikipedia.org/wiki/Regolith).
+Regolith is the blanket of loose rock deposits on the surface of space rocks, planets, and moons. It represents the flexibility and surface-level nature of the language. Crazy connection, I know. For more information about the name, check out its [Wikipedia page](https://en.wikipedia.org/wiki/Regolith).
 
 ## Why build it?
 I built Regolith while learning about compilers and interpreters. It's based off Pseudocode because of its use in teaching beginners how to use logic to solve problems. I use Python for almost every project I take up, be it at work or for side-projects; I decided to use the language to make Regolith owing to its simplicity and structure.
@@ -26,11 +26,12 @@ PROCEDURE fizzbuzz(n : INT)
             OUTPUT ("Fizz")
         ELSE IF (i MOD 5 = 0) THEN
             OUTPUT ("Buzz")
+        ELSE    
+            OUTPUT (i)
         ENDIF
-        
-        OUTPUT (i)
     ENDFOR
-        
+ENDPROCEDURE
+
 fizzbuzz(50)
 ```
 
