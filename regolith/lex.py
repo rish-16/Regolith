@@ -9,7 +9,6 @@ class RegoLexer:
         self.lexer.add('NUMBER', '-?\d+')
         self.lexer.add('STRING', '(".+")|(\'.+\')|(\'\')|("")')
         self.lexer.add('NEWLINE', '\n')
-        self.lexer.add('IDENTIFIER', '[a-zA-Z_][a-zA-Z0-9_]')
         
         # operations
         self.lexer.add('ADD', r'\+')
@@ -23,9 +22,18 @@ class RegoLexer:
         self.lexer.add('OPEN_PAREN', r'\(')
         self.lexer.add('CLOSE_PAREN', r'\)')
         
-        # variables
-        self.lexer.add('VAR_INIT', '(DECLARE)')
-        self.lexer.add('=', '=')
+        # conditionals
+        # self.lexer.add('IF', r'IF')
+        # self.lexer.add('ELSE IF', r'(ELSE IF)')
+        # self.lexer.add('ELSE', r'ELSE')
+        # self.lexer.add('END_IF', r'ENDIF')
+        
+        # comparatives
+        self.lexer.add("GTE", r"(>=)")
+        self.lexer.add("LTE", r"(<=)")
+        self.lexer.add("EQ", r"(==)")
+        self.lexer.add("LT", r"(<)")
+        self.lexer.add("GT", r"(>)")
         
         # data types
         # self.lexer.add('INTEGER_TYPE', r'INTEGER')

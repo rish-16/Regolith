@@ -1,11 +1,19 @@
 from pprint import pprint
 from rply import ParserGenerator
-from ast_assets import Program, Number, String, Print, Add, Sub, Mul, Div, Mod, Pow
+from ast_assets import Program, Number, String, Print, Add, Sub, Mul, Div, Mod, Pow, GTE, LTE, EQ, LT, GT
 
 class RegoParser:
     def __init__(self):
         self.pg = ParserGenerator(
-            ['NEWLINE', 'NUMBER', 'STRING', 'PRINT', 'SEMI_COLON', 'OPEN_PAREN', 'CLOSE_PAREN', 'ADD', 'SUB', 'MUL', 'DIV', 'MOD', 'POW'],
+            ['NEWLINE', 
+            'NUMBER', 
+            'STRING', 
+            'PRINT', 
+            'SEMI_COLON', 
+            'OPEN_PAREN', 
+            'CLOSE_PAREN', 
+            'ADD', 'SUB', 'MUL', 'DIV', 'MOD', 'POW',
+            'GTE', 'LTE', 'LT', 'GT', 'EQ'],
             precedence=[('left', ['ADD', 'SUB']), ('left', ['MUL', 'DIV']), ('left', ['MOD', 'POW'])]
         )
         
@@ -73,6 +81,29 @@ class RegoParser:
                 return Pow(left, right)
             else:
                 raise AssertionError('Operation not possible.')
+                
+        @self.pg.production('expression : expression GT expression')
+        @self.pg.production('expression : expression LT expression')
+        @self.pg.production('expression : expression GTE expression')
+        @self.pg.production('expression : expression LTE expression')
+        @self.pg.production('expression : expression EQ expression')
+        def compare(tokens):
+            left = tokens[0]
+            operator = tokens[1]
+            right = tokens[2]
+            
+            if operator.gettokentype() == 'GT':
+                return GT(left, right)
+            elif operator.gettokentype() == 'LT':
+                return LT(left, right)
+            elif operator.gettokentype() == 'GTE':
+                return GTE(left, right)
+            elif operator.gettokentype() == 'LTE':
+                return LTE(left, right)
+            elif operator.gettokentype() == 'EQ':
+                return EQ(left, right)
+            else:
+                raise AssertionError('Comparison not possible.')
             
         @self.pg.error
         def error_handler(tokens):

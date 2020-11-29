@@ -7,7 +7,7 @@ class Program(BaseBox):
         
     def eval(self):
         return [i.eval() for i in self.token_list]
-
+        
 class Number(BaseBox):
     def __init__(self, value):
         self.value = value
@@ -34,6 +34,7 @@ class BinaryOp(BaseBox):
         self.left = left
         self.right = right
 
+# RAW OPERATIONS
 class Add(BinaryOp):
     def eval(self):
         return self.left.eval() + self.right.eval()
@@ -57,6 +58,27 @@ class Mod(BinaryOp):
 class Pow(BinaryOp):
     def eval(self):
         return self.left.eval() ** self.right.eval()        
+        
+# COMPARATIVES        
+class GT(BinaryOp):
+    def eval(self):
+        return self.left.eval() > self.right.eval()
+        
+class LT(BinaryOp):
+    def eval(self):
+        return self.left.eval() < self.right.eval()
+        
+class GTE(BinaryOp):
+    def eval(self):
+        return self.left.eval() >= self.right.eval()
+        
+class LTE(BinaryOp):
+    def eval(self):
+        return self.left.eval() <= self.right.eval()        
+        
+class EQ(BinaryOp):
+    def eval(self):
+        return self.left.eval() == self.right.eval()
         
 class Print():
     def __init__(self, value):

@@ -16,5 +16,4 @@ with open(filename) as f:
     data = "".join(data)
 
 tokens = lexer.lex(data)
-    
 parser.parse(tokens).eval()
