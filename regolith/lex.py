@@ -9,6 +9,7 @@ class RegoLexer:
         self.lexer.add('NUMBER', '-?\d+')
         self.lexer.add('STRING', '(".+")|(\'.+\')|(\'\')|("")')
         self.lexer.add('NEWLINE', '\n')
+        self.lexer.add('NEWTAB', '\t')
         
         # operations
         self.lexer.add('ADD', r'\+')
@@ -23,10 +24,11 @@ class RegoLexer:
         self.lexer.add('CLOSE_PAREN', r'\)')
         
         # conditionals
-        # self.lexer.add('IF', r'IF')
-        # self.lexer.add('ELSE IF', r'(ELSE IF)')
-        # self.lexer.add('ELSE', r'ELSE')
-        # self.lexer.add('END_IF', r'ENDIF')
+        self.lexer.add('IF', r'IF')
+        self.lexer.add('THEN', r'THEN')
+        self.lexer.add('ELSE IF', r'(ELSE IF)')
+        self.lexer.add('ELSE', r'ELSE')
+        self.lexer.add('END_IF', r'ENDIF')
         
         # comparatives
         self.lexer.add("GTE", r"(>=)")
@@ -35,11 +37,7 @@ class RegoLexer:
         self.lexer.add("LT", r"(<)")
         self.lexer.add("GT", r"(>)")
         
-        # data types
-        # self.lexer.add('INTEGER_TYPE', r'INTEGER')
-        # self.lexer.add('STRING_TYPE', r'STRING')
-        
-        self.lexer.ignore('[ \t\r\f\v]+')
+        self.lexer.ignore('[ \r\f\v]+')
         
     def get_lexer(self):
         self.create_tokens()

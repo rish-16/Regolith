@@ -1,11 +1,11 @@
 from pprint import pprint
 from rply import ParserGenerator
-from ast_assets import Program, Number, String, Print, Add, Sub, Mul, Div, Mod, Pow, GTE, LTE, EQ, LT, GT
+from ast_assets import Program, Number, String, Print, Add, Sub, Mul, Div, Mod, Pow, GTE, LTE, EQ, LT, GT, T1_Conditional
 
 class RegoParser:
     def __init__(self):
         self.pg = ParserGenerator(
-            ['NEWLINE', 
+            ['NEWLINE', 'NEWTAB',
             'NUMBER', 
             'STRING', 
             'PRINT', 
@@ -13,7 +13,8 @@ class RegoParser:
             'OPEN_PAREN', 
             'CLOSE_PAREN', 
             'ADD', 'SUB', 'MUL', 'DIV', 'MOD', 'POW',
-            'GTE', 'LTE', 'LT', 'GT', 'EQ'],
+            'GTE', 'LTE', 'LT', 'GT', 'EQ',
+            'IF', 'THEN', 'END_IF'],
             precedence=[('left', ['ADD', 'SUB']), ('left', ['MUL', 'DIV']), ('left', ['MOD', 'POW'])]
         )
         
@@ -43,6 +44,14 @@ class RegoParser:
         @self.pg.production('statement : expression')
         def statement_expr(tokens):
             return tokens[0]
+            
+        @self.pg.production('statement : NEWTAB statement')
+        def indented_statement(tokens):
+            return tokens[1]
+            
+        @self.pg.production('program : IF OPEN_PAREN expression CLOSE_PAREN THEN NEWLINE statement_list END_IF')
+        def make_conditional_type_1(tokens):
+            return T1_Conditional(tokens[2], tokens[6])
             
         @self.pg.production('expression : NUMBER')
         def expression_number(tokens):

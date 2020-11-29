@@ -22,6 +22,15 @@ class String(BaseBox):
     def eval(self):
         return str(self.value).strip('\"')
         
+class T1_Conditional(BaseBox):
+    def __init__(self, expression1, block1):
+        self.expression1 = expression1
+        self.block1 = block1
+    
+    def eval(self):
+        if (self.expression1.eval() == True):
+            return [i.eval() for i in self.block1]
+        
 class Comment(BaseBox):
     def __init__(self, value):
         self.value = value
