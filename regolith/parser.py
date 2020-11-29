@@ -18,15 +18,15 @@ class RegoParser:
         def statement_list_stmt(tokens):
             return [tokens[0]] # only return the statement and not semicolon
             
-        @self.pg.production('statement : statement NEWLINE')
-        def newline(tokens):
-            return "\n"
-            
         @self.pg.production('statement_list : statement_list statement SEMI_COLON')
         def statement_list(tokens):
             initial = tokens[0]
             initial.append(tokens[1])
             return initial
+            
+        @self.pg.production('statement_list : statement_list NEWLINE')
+        def newline(tokens):
+            return tokens[0]
     
         @self.pg.production('statement : PRINT OPEN_PAREN expression CLOSE_PAREN')
         def print_statement(tokens):
