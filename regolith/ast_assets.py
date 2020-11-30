@@ -30,6 +30,18 @@ class T1_Conditional(BaseBox):
     def eval(self):
         if (self.expression1.eval() == True):
             return [i.eval() for i in self.block1]
+            
+class T2_Conditional(BaseBox):
+    def __init__(self, expression1, block1, block2):
+        self.expression1 = expression1
+        self.block1 = block1
+        self.block2 = block2
+    
+    def eval(self):
+        if (self.expression1.eval() == True):
+            return [i.eval() for i in self.block1]
+        else:
+            return [i.eval() for i in self.block2]
         
 class Comment(BaseBox):
     def __init__(self, value):
