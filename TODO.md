@@ -6,7 +6,7 @@ Here's a list of features I aim to implement in due time. This isn't a ranking l
 
 - [x] Integer
 - [x] String
-- [ ] Float
+- [x] Float
 - [ ] Boolean
 - [ ] Array / List
 
@@ -22,6 +22,7 @@ Here's a list of features I aim to implement in due time. This isn't a ranking l
 
 - [ ] Environment Model
 - [ ] Variable Initialisation
+- [ ] Function Declaration
 
 ### Control Flow and Loops
 
