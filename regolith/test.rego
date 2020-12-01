@@ -1,9 +1,5 @@
 IF (5 > 4) THEN
-    OUTPUT ("hello");
-    OUTPUT (7 <= 9);
-    OUTPUT ("world");
-    OUTPUT (5 + 6);
+    OUTPUT ("first");
 ELSE
-    OUTPUT ("No");
-    OUTPUT ("Yes");
+    OUTPUT ("fourth");
 ENDIF

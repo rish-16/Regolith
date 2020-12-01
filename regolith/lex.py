@@ -26,14 +26,13 @@ class RegoLexer:
         # conditionals
         self.lexer.add('IF', r'IF')
         self.lexer.add('THEN', r'THEN')
-        self.lexer.add('ELSE IF', r'(ELSE IF)')
         self.lexer.add('ELSE', r'ELSE')
         self.lexer.add('END_IF', r'ENDIF')
         
         # comparatives
         self.lexer.add("GTE", r"(>=)")
         self.lexer.add("LTE", r"(<=)")
-        self.lexer.add("EQ", r"(==)")
+        self.lexer.add("EQ", r"(=)")
         self.lexer.add("LT", r"(<)")
         self.lexer.add("GT", r"(>)")
         

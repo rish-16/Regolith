@@ -21,7 +21,18 @@ class String(BaseBox):
         
     def eval(self):
         return str(self.value).strip('\"')
-        
+
+"""
+Conditional types
+IF
+
+IF 
+ELSE
+
+IF 
+ELSE IF ... ELSE IF
+ELSE
+"""
 class T1_Conditional(BaseBox):
     def __init__(self, expression1, block1):
         self.expression1 = expression1
@@ -42,6 +53,24 @@ class T2_Conditional(BaseBox):
             return [i.eval() for i in self.block1]
         else:
             return [i.eval() for i in self.block2]
+            
+class T3_Conditional(BaseBox):
+    def __init__(self, expressions, blocks, def_block):
+        """
+        Indices of conditional expressions match with indices of blocks
+        """
+        self.expressions = expressions
+        self.blocks = blocks
+        self.def_block = def_block # ELSE block
+    
+    def eval(self):
+        b_id = 0
+        for cond in self.expressions:
+            if cond.eval() == True:
+                return self.blocks[b_id].eval()
+            b_id += 1
+            
+        return [i.eval() for i in self.def_block] # runs when no other condition is met
         
 class Comment(BaseBox):
     def __init__(self, value):

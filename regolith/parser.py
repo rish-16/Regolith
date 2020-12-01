@@ -1,6 +1,6 @@
 from pprint import pprint
 from rply import ParserGenerator
-from ast_assets import Program, Number, String, Print, Add, Sub, Mul, Div, Mod, Pow, GTE, LTE, EQ, LT, GT, T1_Conditional, T2_Conditional
+from ast_assets import Program, Number, String, Print, Add, Sub, Mul, Div, Mod, Pow, GTE, LTE, EQ, LT, GT, T1_Conditional, T2_Conditional, T3_Conditional
 
 class RegoParser:
     def __init__(self):
@@ -21,6 +21,7 @@ class RegoParser:
     def parse(self):
         @self.pg.production('program : statement_list')
         def main(state_list):
+            print (state_list)
             return Program(state_list[0])
         
         @self.pg.production('statement_list : statement SEMI_COLON')
@@ -48,13 +49,23 @@ class RegoParser:
         @self.pg.production('statement : NEWTAB statement')
         def indented_statement(tokens):
             return tokens[1]
-            
+        
+        """
+        IF 
+        ENDIF
+        """
         @self.pg.production('statement_list : IF OPEN_PAREN expression CLOSE_PAREN THEN NEWLINE statement_list NEWLINE END_IF')
         def make_conditional_type_1(tokens):
             return [T1_Conditional(tokens[2], tokens[6])]
             
+        """
+        IF 
+        ELSE
+        ENDIF
+        """
         @self.pg.production('statement_list : IF OPEN_PAREN expression CLOSE_PAREN THEN NEWLINE statement_list NEWLINE ELSE NEWLINE statement_list NEWLINE END_IF')
         def make_conditional_type_2(tokens):
+            pprint (tokens)
             return [T2_Conditional(tokens[2], tokens[6], tokens[10])]
             
         @self.pg.production('expression : NUMBER')
