@@ -1,5 +1,7 @@
 IF (5 > 4) THEN
-    OUTPUT ("first");
+    OUTPUT ("2");
 ELSE
-    OUTPUT ("fourth");
-ENDIF
+    OUTPUT ("3");
+ENDIF    
+
+OUTPUT ("1");

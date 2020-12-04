@@ -21,7 +21,7 @@ class RegoParser:
     def parse(self):
         @self.pg.production('program : statement_list')
         def main(state_list):
-            print (state_list)
+            pprint (state_list)
             return Program(state_list[0])
         
         @self.pg.production('statement_list : statement SEMI_COLON')
@@ -56,6 +56,7 @@ class RegoParser:
         """
         @self.pg.production('statement_list : IF OPEN_PAREN expression CLOSE_PAREN THEN NEWLINE statement_list NEWLINE END_IF')
         def make_conditional_type_1(tokens):
+            pprint (tokens)
             return [T1_Conditional(tokens[2], tokens[6])]
             
         """
